@@ -1,0 +1,102 @@
+<html>
+<head>
+<style>
+#canvas {
+    background-color: #4a4a4a;
+}
+</style>
+</head>
+<body>
+<canvas id="canvas" width="500" height="200"></canvas>
+<br>
+<button id="start">start</button>
+<button id="stop">stop</button>
+<button id="clear">clear</button>
+<script>
+var cvs = document.getElementById('canvas');
+var ctx = cvs.getContext('2d');
+ctx.lineWidth = 15;
+ctx.textAlign = 'center';
+ctx.textBaseline = 'middle';
+ctx.font = '40px Trebuchet MS';
+ctx.fillStyle = 'white';
+
+/**
+ * @closure
+ */
+var draw = (function () {
+    var start = 1.5 * Math.PI; // Start circle from top
+    var end = (2 * Math.PI) / 100; // One percent of circle
+
+    /**
+     * Draw percentage of a circle
+     *
+     * @param int x Coordinate
+     * @param int y Coordinate
+     * @param int p Percentage of circle
+     * @param string text Text to print
+     * @param string color Stroke color
+     * @return void
+     */
+    return function (x, y, p, text, color) {
+        p = p || 100; // If 0% we draw full circle
+        ctx.strokeStyle = color;
+
+        ctx.beginPath();
+        ctx.fillText(text, x, y);
+        ctx.arc(x, y, 50, start, p * end + start, false);
+        ctx.stroke();
+    };
+}());
+var h1 = document.getElementsByTagName('h1')[0],
+    start = document.getElementById('start'),
+    stop = document.getElementById('stop'),
+    clear = document.getElementById('clear'),
+    seconds = 0, minutes = 30, hours = 4,
+    t;
+
+function add() {
+    seconds++;
+    if (seconds >= 60) {
+        seconds = 0;
+        minutes++;
+        if (minutes >= 60) {
+            minutes = 0;
+            hours++;
+        }
+    }
+    
+    timer();
+    // Find percentage
+    var hp = 100 / 12 * (hours % 12);
+    var mp = 100 / 60 * minutes;
+    var sp = 100 / 60 * seconds;
+    // Ensure double digits
+    
+    // Draw
+    ctx.clearRect(0, 0, cvs.width, cvs.height);
+    draw(125, 100, hp, hours, 'palevioletred');
+    draw(250, 100, mp, minutes, 'limegreen');
+    draw(375, 100, sp, seconds, 'steelblue');
+}
+function timer() {
+    t = setTimeout(add, 1000);
+}
+timer();
+
+
+/* Start button */
+start.onclick = timer;
+
+/* Stop button */
+stop.onclick = function() {
+    clearTimeout(t);
+}
+
+/* Clear button */
+clear.onclick = function() {
+    seconds = 0; minutes = 30; hours = 4;
+}
+</script>
+</body>
+</html>
