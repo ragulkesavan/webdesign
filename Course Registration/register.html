@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.box {
+  position: absolute;
+  z-index: 15;
+  top: 50%;
+  left: 50%;
+  height:350px;
+  width:250px;
+  margin: -100px 0 0 -150px;
+  background: rgba(53, 46, 45, 0.7);
+}
+body  {
+  background-image: url("https://ak1.picdn.net/shutterstock/videos/11659811/thumb/1.jpg");
+  /* Full height */
+  height: 100%; 
+  width: 100%;
+  /* Center and scale the image nicely */
+}
+.bg   {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+form  {
+	color: #F3AD0B ;
+}
+h1  {
+	color: #E58416;
+}
+</style>
+</head>
+<body>
+<div class="box" >
+<div>
+<h1><pre> Student portal </pre></h1>
+<form action="/inset.php" method="post">
+  <fieldset>
+    <legend>Course registration:</legend>
+    Name:<br>
+    <input type="text" name="name">
+    <br>
+    Rer No:<br>
+    <input type="text" name="regno"><br>
+    PH-no:<br>
+    <input type="text" name="phno"><br>
+    e-mail:<br>	
+    <input type="text" name="email">
+    <br><br>
+    <input type="submit" value="Submit">
+
+  </fieldset>
+  <br>
+</form>
+</div>
+</div>
+</body>
+</html>
